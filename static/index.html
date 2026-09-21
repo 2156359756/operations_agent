@@ -1,0 +1,2970 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>品牌官号运营Agent - 知原药业</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* 侧边栏 */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-header h1 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-header .subtitle {
+            font-size: 12px;
+            color: #95a5a6;
+        }
+        
+        .config-section {
+            margin-bottom: 20px;
+        }
+        
+        .config-section h3 {
+            font-size: 13px;
+            color: #3498db;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .config-item {
+            font-size: 12px;
+            padding: 6px 0;
+            color: #ecf0f1;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .config-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 30px;
+            max-width: 1200px;
+        }
+        
+        /* 工作流程卡片 */
+        .workflow-step {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            display: none;
+        }
+        
+        .workflow-step.active {
+            display: block;
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: #3498db;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .step-status {
+            margin-left: auto;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            background: #e0e0e0;
+            color: #666;
+        }
+        
+        .step-status.completed {
+            background: #27ae60;
+            color: #fff;
+        }
+        
+        .step-status.in-progress {
+            background: #f39c12;
+            color: #fff;
+        }
+        
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .form-group label .required {
+            color: #e74c3c;
+        }
+        
+        select, input[type="text"], textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        /* 按钮样式 */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-primary:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .btn-success {
+            background: #27ae60;
+            color: #fff;
+        }
+        
+        .btn-success:hover {
+            background: #219a52;
+        }
+        
+        .btn-secondary {
+            background: #95a5a6;
+            color: #fff;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* 选题列表 */
+        .topics-list {
+            margin: 20px 0;
+        }
+        
+        .topic-item {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .topic-item:hover {
+            border-color: #3498db;
+            background: #f8f9fa;
+        }
+        
+        .topic-item.selected {
+            border-color: #27ae60;
+            background: #e8f8f5;
+        }
+        
+        .topic-item input[type="radio"] {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .topic-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            padding-right: 40px;
+        }
+        
+        .topic-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        
+        .topic-meta span {
+            font-size: 12px;
+            padding: 3px 10px;
+            background: #ecf0f1;
+            border-radius: 20px;
+            color: #7f8c8d;
+        }
+        
+        .topic-risk {
+            font-size: 13px;
+            color: #e67e22;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #fef9e7;
+            border-radius: 6px;
+        }
+        
+        /* 大纲编辑 */
+        .outline-editor {
+            margin-top: 20px;
+        }
+        
+        .outline-editor textarea {
+            font-family: "Consolas", "Monaco", monospace;
+            line-height: 1.8;
+        }
+        
+        /* 脚本展示 */
+        .script-display {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .compliance-warning {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .compliance-warning.has-risk {
+            background: #fdecea;
+            border: 2px solid #e74c3c;
+        }
+        
+        .compliance-warning.no-risk {
+            background: #e8f8f5;
+            border: 2px solid #27ae60;
+        }
+        
+        .compliance-warning h4 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .violation-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: #fff;
+            border-radius: 6px;
+            border-left: 4px solid;
+        }
+        
+        .violation-item.critical {
+            border-color: #e74c3c;
+        }
+        
+        .violation-item.medium {
+            border-color: #f39c12;
+        }
+        
+        .violation-word {
+            font-weight: 600;
+            color: #e74c3c;
+            margin-right: 10px;
+        }
+        
+        .violation-desc {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* 图片提示词卡片 */
+        .image-prompts-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .prompt-card {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .prompt-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .prompt-card-title {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .prompt-section {
+            margin-bottom: 15px;
+        }
+        
+        .prompt-section h5 {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .prompt-content {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            max-height: 150px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .copy-btn {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #2980b9;
+        }
+        
+        .copy-btn.copied {
+            background: #27ae60;
+        }
+        
+        .compliance-reminder {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+        
+        .compliance-reminder strong {
+            color: #856404;
+        }
+        
+        /* 物料包预览 */
+        .package-preview {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .package-preview pre {
+            white-space: pre-wrap;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        /* 历史任务列表 */
+        .history-list {
+            margin-top: 20px;
+        }
+        
+        .history-item {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .history-item:hover {
+            border-color: #3498db;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .history-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .history-item-title {
+            font-weight: 500;
+        }
+        
+        .history-item-date {
+            font-size: 12px;
+            color: #95a5a6;
+        }
+        
+        .history-item-meta {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        /* 加载状态 */
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e0e0e0;
+            border-top-color: #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Toast提示 */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2c3e50;
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .toast.success {
+            background: #27ae60;
+        }
+        
+        .toast.error {
+            background: #e74c3c;
+        }
+        
+        /* 模型配置 */
+        .model-current {
+            font-size: 12px;
+            color: #ecf0f1;
+            margin-bottom: 8px;
+            word-break: break-all;
+        }
+
+        .model-current .model-none {
+            color: #e74c3c;
+        }
+
+        .sidebar select.model-select {
+            padding: 8px 10px;
+            font-size: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.08);
+            color: #ecf0f1;
+            margin-bottom: 8px;
+        }
+
+        .sidebar select.model-select option {
+            color: #2c3e50;
+        }
+
+        .model-row {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px 18px;
+            margin-bottom: 12px;
+        }
+
+        .model-row.is-default {
+            border-color: #2ecc71;
+            background: #f2fbf5;
+        }
+
+        .model-row.no-key {
+            border-color: #f39c12;
+            background: #fffaf2;
+        }
+
+        .model-row-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .model-row-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .model-badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .badge-default {
+            background: #2ecc71;
+            color: #fff;
+        }
+
+        .badge-nokey {
+            background: #f39c12;
+            color: #fff;
+        }
+
+        .badge-off {
+            background: #95a5a6;
+            color: #fff;
+        }
+
+        .model-row-meta {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 6px;
+            line-height: 1.7;
+            word-break: break-all;
+        }
+
+        .model-row-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: #3498db;
+            border: 2px solid #3498db;
+        }
+
+        .btn-outline:hover {
+            background: #eaf4fc;
+        }
+
+        .model-form {
+            border: 2px dashed #bdc3c7;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .model-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .model-form .form-hint {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 6px;
+        }
+
+        .model-empty {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 30px 10px;
+            font-size: 14px;
+        }
+
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #95a5a6;
+        }
+        
+        .modal-close:hover {
+            color: #333;
+        }
+        
+        .modal-body pre {
+            white-space: pre-wrap;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        /* 流程指示器 */
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #e0e0e0;
+            z-index: 0;
+        }
+        
+        .progress-step {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .progress-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        
+        .progress-step.active .progress-dot {
+            background: #3498db;
+        }
+        
+        .progress-step.completed .progress-dot {
+            background: #27ae60;
+        }
+        
+        .progress-label {
+            font-size: 11px;
+            color: #95a5a6;
+            text-align: center;
+        }
+        
+        .progress-step.active .progress-label,
+        .progress-step.completed .progress-label {
+            color: #333;
+        }
+
+        /* 可点击跳转的进度条 */
+        .progress-step {
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+            padding: 0;
+        }
+
+        .progress-step:hover .progress-dot {
+            transform: scale(1.15);
+        }
+
+        .progress-dot {
+            transition: transform .15s ease, background .15s ease;
+        }
+
+        .progress-step:focus-visible {
+            outline: 2px solid #3498db;
+            outline-offset: 4px;
+            border-radius: 6px;
+        }
+
+        .progress-step.locked {
+            cursor: not-allowed;
+            opacity: .45;
+        }
+
+        .progress-step.locked:hover .progress-dot {
+            transform: none;
+        }
+
+        .progress-step.has-data .progress-dot::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #27ae60;
+            border: 2px solid #fff;
+            transform: translate(14px, -14px);
+        }
+
+        .progress-dot {
+            position: relative;
+        }
+
+        /* 模型分类选择 */
+        .model-group {
+            margin-bottom: 14px;
+        }
+
+        .model-group-label {
+            font-size: 11px;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-bottom: 4px;
+        }
+
+        .model-type-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .model-type-tab {
+            padding: 10px 18px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #7f8c8d;
+            font-family: inherit;
+        }
+
+        .model-type-tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .model-type-badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .badge-text-model {
+            background: #e8f4fd;
+            color: #2980b9;
+        }
+
+        .badge-image-model {
+            background: #f4e8fd;
+            color: #8e44ad;
+        }
+
+        .badge-video-model {
+            background: #fdf0e8;
+            color: #d35400;
+        }
+
+        /* 图片生成区 */
+        .prompt-card.chosen {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,.15);
+        }
+
+        .prompt-card-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .image-size-select {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: inherit;
+        }
+
+        .generated-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .image-card {
+            background: #fff;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image-card.optimized {
+            border-color: #27ae60;
+        }
+
+        .image-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            background: #f5f7fa;
+            cursor: zoom-in;
+            display: block;
+        }
+
+        .image-card-body {
+            padding: 12px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .image-card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .image-card-meta {
+            font-size: 11px;
+            color: #95a5a6;
+            line-height: 1.5;
+        }
+
+        .image-card-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+        .image-optimize-box {
+            margin-top: 8px;
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .image-optimize-box.show {
+            display: flex;
+        }
+
+        .image-optimize-box textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 12px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .image-empty {
+            padding: 30px;
+            text-align: center;
+            color: #95a5a6;
+            background: #fafbfc;
+            border: 2px dashed #e1e8ed;
+            border-radius: 10px;
+        }
+
+        .section-divider {
+            margin: 25px 0 15px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* 确认弹窗 */
+        .confirm-box {
+            max-width: 480px;
+        }
+
+        .confirm-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 20px;
+            white-space: pre-line;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.85);
+            z-index: 1500;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 92vw;
+            max-height: 92vh;
+            object-fit: contain;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .image-prompts-container {
+                grid-template-columns: 1fr;
+            }
+
+            .generated-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🏢 品牌官号运营Agent</h1>
+                <div class="subtitle">知原药业 · 内容创作助手</div>
+            </div>
+            
+            <div class="config-section">
+                <h3>🤖 当前模型</h3>
+
+                <div class="model-group">
+                    <div class="model-group-label">📝 文本生成</div>
+                    <div class="model-current" id="current-text-model">加载中...</div>
+                    <label for="text-model-select" style="position:absolute;left:-9999px;">切换文本模型</label>
+                    <select id="text-model-select" class="model-select" onchange="switchModel(this.value)">
+                        <!-- 动态加载 -->
+                    </select>
+                </div>
+
+                <div class="model-group">
+                    <div class="model-group-label">🖼️ 图片/视频生成</div>
+                    <div class="model-current" id="current-image-model">加载中...</div>
+                    <label for="image-model-select" style="position:absolute;left:-9999px;">切换图片模型</label>
+                    <select id="image-model-select" class="model-select" onchange="switchModel(this.value)">
+                        <!-- 动态加载 -->
+                    </select>
+                </div>
+
+                <button class="btn btn-primary btn-sm" style="width:100%;" onclick="openModelModal()">
+                    ⚙️ 管理API与模型
+                </button>
+            </div>
+
+            <div class="config-section">
+                <h3>💊 品牌矩阵</h3>
+                <div id="brand-list" class="config-list">
+                    <!-- 动态加载 -->
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <h3>📱 目标平台</h3>
+                <div id="platform-list" class="config-list">
+                    <!-- 动态加载 -->
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <h3>📂 内容栏目</h3>
+                <div id="column-list" class="config-list">
+                    <!-- 动态加载 -->
+                </div>
+            </div>
+            
+            <div class="config-section">
+                <h3>👥 目标人群</h3>
+                <div id="audience-list" class="config-list">
+                    <!-- 动态加载 -->
+                </div>
+            </div>
+            
+            <div class="config-section" style="margin-top: 30px;">
+                <h3>📜 历史任务</h3>
+                <div id="history-sidebar" class="config-list">
+                    <!-- 动态加载 -->
+                </div>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 流程进度条 -->
+            <div class="progress-bar" id="progress-bar">
+                <button type="button" class="progress-step active" data-step="1" onclick="jumpToStep(1)" title="点击跳转到该步骤">
+                    <div class="progress-dot">1</div>
+                    <div class="progress-label">填写信息<br>生成选题</div>
+                </button>
+                <button type="button" class="progress-step" data-step="2" onclick="jumpToStep(2)" title="点击跳转到该步骤">
+                    <div class="progress-dot">2</div>
+                    <div class="progress-label">选择确认<br>生成大纲</div>
+                </button>
+                <button type="button" class="progress-step" data-step="3" onclick="jumpToStep(3)" title="点击跳转到该步骤">
+                    <div class="progress-dot">3</div>
+                    <div class="progress-label">审核大纲<br>生成脚本</div>
+                </button>
+                <button type="button" class="progress-step" data-step="4" onclick="jumpToStep(4)" title="点击跳转到该步骤">
+                    <div class="progress-dot">4</div>
+                    <div class="progress-label">图片提示词<br>生成图片</div>
+                </button>
+                <button type="button" class="progress-step" data-step="5" onclick="jumpToStep(5)" title="点击跳转到该步骤">
+                    <div class="progress-dot">5</div>
+                    <div class="progress-label">预览导出<br>完成发布</div>
+                </button>
+            </div>
+
+            <div class="jump-hint" id="jump-hint" style="display:none;background:#fff8e1;border-left:4px solid #f39c12;padding:12px 16px;border-radius:8px;margin-bottom:20px;font-size:13px;color:#7d6608;"></div>
+            
+            <!-- 步骤1: 填写信息 & 生成选题 -->
+            <section class="workflow-step active" id="step-1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">填写创作需求 & 生成选题</div>
+                    <div class="step-status" id="step-1-status">进行中</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>目标平台 <span class="required">*</span></label>
+                    <select id="platform-select">
+                        <option value="">请选择目标平台</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>内容栏目 <span class="required">*</span></label>
+                    <select id="column-select">
+                        <option value="">请选择内容栏目</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>目标人群 <span class="required">*</span></label>
+                    <select id="audience-select">
+                        <option value="">请选择目标人群</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>创作主题/核心方向 <span class="required">*</span></label>
+                    <input type="text" id="topic-input" placeholder="例如：夏季油痘肌护理指南、敏感肌修护攻略等">
+                </div>
+                
+                <div class="form-group">
+                    <label>指定品牌（可选）</label>
+                    <select id="brand-select">
+                        <option value="">不指定，基于整体产品线</option>
+                    </select>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-primary" id="generate-topics-btn" onclick="generateTopics()">
+                        🎯 生成选题建议
+                    </button>
+                </div>
+                
+                <!-- 选题列表 -->
+                <div id="topics-container" style="display: none;">
+                    <h3 style="margin: 25px 0 15px;">📋 请选择一条选题（必须选择才能继续）</h3>
+                    <div class="topics-list" id="topics-list"></div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-success" id="confirm-topic-btn" disabled onclick="confirmTopic()">
+                            ✅ 确认选题并生成大纲
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 步骤2: 审核大纲 -->
+            <section class="workflow-step" id="step-2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">审核并确认大纲</div>
+                    <div class="step-status" id="step-2-status">待处理</div>
+                </div>
+                
+                <div class="selected-topic-info" id="selected-topic-info">
+                    <!-- 显示选中的选题信息 -->
+                </div>
+                
+                <div class="outline-editor">
+                    <label>内容大纲（可手动修改）</label>
+                    <textarea id="outline-textarea" rows="15" placeholder="大纲内容将在这里显示..."></textarea>
+                </div>
+                
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>修改反馈（可选，如有修改意见请填写）</label>
+                    <input type="text" id="outline-feedback" placeholder="如需调整大纲方向，请填写反馈">
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="jumpToStep(1)">← 返回上一步</button>
+                    <button class="btn btn-outline" id="regen-outline-btn" onclick="requestOutline()">
+                        🔄 重新生成大纲
+                    </button>
+                    <button class="btn btn-success" id="confirm-outline-btn" onclick="confirmOutline()">
+                        ✅ 确认大纲并生成脚本
+                    </button>
+                </div>
+            </section>
+            
+            <!-- 步骤3: 生成脚本 -->
+            <section class="workflow-step" id="step-3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-title">脚本初稿 & 合规扫描</div>
+                    <div class="step-status" id="step-3-status">待处理</div>
+                </div>
+                
+                <div class="script-display" id="script-display">
+                    脚本内容加载中...
+                </div>
+                
+                <!-- 合规扫描结果 -->
+                <div class="compliance-warning" id="compliance-warning">
+                    <h4>🔍 合规扫描结果</h4>
+                    <div id="violations-list"></div>
+                </div>
+                
+                <div class="form-group" style="margin-top:20px;">
+                    <label for="script-feedback">脚本修改反馈（可选，填写后点「重新生成脚本」）</label>
+                    <input type="text" id="script-feedback" placeholder="例如：开头再口语化一些、减少专业术语">
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="jumpToStep(2)">← 返回修改大纲</button>
+                    <button class="btn btn-outline" id="regen-script-btn" onclick="requestScript()">
+                        🔄 重新生成脚本
+                    </button>
+                    <button class="btn btn-primary" id="proceed-image-btn" onclick="requestImagePrompts()">
+                        📷 生成图片提示词 →
+                    </button>
+                </div>
+            </section>
+            
+            <!-- 步骤4: 图片提示词 & 生成图片 -->
+            <section class="workflow-step" id="step-4">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-title">图片提示词 & 生成图片</div>
+                    <div class="step-status" id="step-4-status">待处理</div>
+                </div>
+
+                <div class="form-group" style="max-width:320px;">
+                    <label for="prompt-count-select">生成几套图片提示词</label>
+                    <select id="prompt-count-select">
+                        <option value="2">2 套</option>
+                        <option value="4" selected>4 套</option>
+                        <option value="6">6 套</option>
+                        <option value="8">8 套</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" id="regen-prompts-btn" onclick="requestImagePrompts()">
+                        🔄 重新生成图片提示词
+                    </button>
+                </div>
+
+                <div class="image-prompts-container" id="image-prompts-container">
+                    <!-- 动态生成多套图片提示词 -->
+                </div>
+
+                <div class="compliance-reminder">
+                    <strong>⚠️ 重要提示</strong><br>
+                    AI生成图片仅作为设计参考，对外发布前必须经过医学、法务合规审核；严禁制作皮肤前后疗效对比图，禁止暗示治疗效果。
+                </div>
+
+                <div class="section-divider">🖼️ 已生成的图片</div>
+                <div style="font-size:13px;color:#7f8c8d;margin-bottom:12px;">
+                    在上方任选一套提示词点击「生成图片」出图，出图后可以填写修改意见让模型继续优化。图片会一并写入导出的物料包。
+                </div>
+                <div class="generated-images" id="generated-images">
+                    <!-- 动态加载 -->
+                </div>
+
+                <div class="button-group" style="margin-top:25px;">
+                    <button class="btn btn-secondary" onclick="jumpToStep(3)">← 返回修改脚本</button>
+                    <button class="btn btn-success" id="preview-package-btn" onclick="previewPackage(this)">
+                        📦 预览发布物料包
+                    </button>
+                </div>
+            </section>
+            
+            <!-- 步骤5: 预览导出 -->
+            <section class="workflow-step" id="step-5">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <div class="step-title">预览 & 导出发布物料包</div>
+                    <div class="step-status" id="step-5-status">待处理</div>
+                </div>
+                
+                <div class="package-preview" id="package-preview">
+                    <pre id="package-content">物料包内容加载中...</pre>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="jumpToStep(4)">← 返回修改</button>
+                    <button class="btn btn-outline" onclick="previewPackage(this)">🔄 重新生成预览</button>
+                    <button class="btn btn-success" id="export-btn" onclick="exportPackage()">
+                        📥 导出Markdown文件
+                    </button>
+                    <button class="btn btn-primary" onclick="startNewTask()">
+                        🔄 开始新任务
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- 历史任务模态框 -->
+    <div class="modal" id="history-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📋 历史任务详情</h3>
+                <button class="modal-close" onclick="closeHistoryModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="history-modal-body">
+                <pre></pre>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 模型/API管理模态框 -->
+    <div class="modal" id="model-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>⚙️ API与模型管理</h3>
+                <button class="modal-close" onclick="closeModelModal()" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="model-form">
+                    <h4 style="margin-bottom:15px;" id="model-form-title">➕ 添加新模型</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mf-name">显示名称 <span class="required">*</span></label>
+                            <input type="text" id="mf-name" placeholder="例如：我的 DeepSeek">
+                        </div>
+                        <div class="form-group">
+                            <label for="mf-provider">供应商 <span class="required">*</span></label>
+                            <input type="text" id="mf-provider" placeholder="例如：DeepSeek">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mf-model-id">模型ID <span class="required">*</span></label>
+                            <input type="text" id="mf-model-id" placeholder="例如：deepseek-chat">
+                            <div class="form-hint">调用时传给接口的 model 值，需与供应商文档一致</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mf-base-url">API地址 <span class="required">*</span></label>
+                            <input type="text" id="mf-base-url" placeholder="https://api.deepseek.com/v1">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mf-model-type">模型分类 <span class="required">*</span></label>
+                            <select id="mf-model-type" onchange="onModelTypeChange()">
+                                <option value="text">文本生成模型（选题/大纲/脚本/提示词）</option>
+                                <option value="image">图片生成模型（出图）</option>
+                                <option value="video">视频生成模型</option>
+                            </select>
+                            <div class="form-hint">文本流程用文本模型，出图用图片模型，两类各自独立选择</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mf-api-style">接口风格 <span class="required">*</span></label>
+                            <select id="mf-api-style">
+                                <option value="openai">OpenAI 兼容（大多数供应商）</option>
+                                <option value="anthropic">Anthropic Messages</option>
+                                <option value="dashscope">阿里云 DashScope（通义万相）</option>
+                            </select>
+                            <div class="form-hint" id="mf-style-hint">不确定就选 OpenAI 兼容</div>
+                        </div>
+                    </div>
+                    <div class="form-row" id="mf-edit-row" style="display:none;">
+                        <div class="form-group">
+                            <label for="mf-quality">画质 quality</label>
+                            <select id="mf-quality">
+                                <option value="">不发送该参数（默认）</option>
+                                <option value="low">low（gpt-image 系列便宜档）</option>
+                                <option value="medium">medium</option>
+                                <option value="high">high</option>
+                                <option value="standard">standard（DALL·E 3）</option>
+                                <option value="hd">hd（DALL·E 3 高清）</option>
+                            </select>
+                            <div class="form-hint">按中转站文档填。文档示例里带 quality="low" 就选 low；不认这个参数的供应商请留空</div>
+                        </div>
+                        <div class="form-group">
+                            <label>原图编辑能力</label>
+                            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:400;">
+                                <input type="checkbox" id="mf-supports-edit" style="width:auto;">
+                                <span>支持「基于原图编辑」</span>
+                            </label>
+                            <div class="form-hint">支持时优化图片可直接改原图；不支持则只能改写提示词重绘</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mf-api-key">API密钥 <span class="required" id="mf-key-required">*</span></label>
+                        <input type="text" id="mf-api-key" placeholder="粘贴你的 API Key">
+                        <div class="form-hint" id="mf-key-hint">密钥保存在本机 user_config/models.json，不会上传到其他地方</div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn btn-primary" id="mf-submit-btn" onclick="submitModelForm()">保存模型</button>
+                        <button class="btn btn-secondary" onclick="resetModelForm()">清空表单</button>
+                    </div>
+                </div>
+
+                <h4 style="margin-bottom:15px;">已配置的模型</h4>
+                <div class="model-type-tabs" id="model-type-tabs">
+                    <button type="button" class="model-type-tab active" data-type="text" onclick="setModelListTab('text')">📝 文本生成模型</button>
+                    <button type="button" class="model-type-tab" data-type="image" onclick="setModelListTab('image')">🖼️ 图片/视频生成模型</button>
+                </div>
+                <div id="model-list">
+                    <!-- 动态加载 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通用确认弹窗（重新生成会覆盖已有结果时使用） -->
+    <div class="modal" id="confirm-modal">
+        <div class="modal-content confirm-box">
+            <div class="modal-header">
+                <h3 id="confirm-title">⚠️ 请确认</h3>
+                <button class="modal-close" onclick="resolveConfirm(false)" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="confirm-text" id="confirm-text"></div>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="resolveConfirm(false)">取消</button>
+                    <button class="btn btn-danger" id="confirm-ok-btn" onclick="resolveConfirm(true)">确认重新生成</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图片放大查看 -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="放大查看生成的图片">
+    </div>
+
+    <!-- Toast提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 全局状态
+        // taskId 全流程只有一个：五个步骤都写进同一个任务文档，导出时才能串起来
+        const state = {
+            currentStep: 1,
+            taskId: null,
+            selectedTopic: null,
+            topics: [],
+            outline: '',
+            script: '',
+            violations: [],
+            imagePrompts: [],
+            images: [],
+            complianceReminder: '',
+            exportFilename: '',
+            exportedMarkdown: ''
+        };
+
+        const STEP_TITLES = {
+            1: '生成选题',
+            2: '生成大纲',
+            3: '生成脚本',
+            4: '生成图片提示词',
+            5: '预览导出'
+        };
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadConfig();
+            loadHistory();
+            loadModels();
+            renderProgress();
+            renderImagePrompts([]);
+            renderGeneratedImages();
+        });
+
+        // ============ 通用确认弹窗 ============
+
+        let confirmResolver = null;
+
+        // 返回 Promise<boolean>，用来在覆盖已有结果前拦一道
+        function askConfirm(text, okLabel = '确认重新生成', title = '⚠️ 请确认') {
+            document.getElementById('confirm-title').textContent = title;
+            document.getElementById('confirm-text').textContent = text;
+            document.getElementById('confirm-ok-btn').textContent = okLabel;
+            document.getElementById('confirm-modal').classList.add('show');
+            return new Promise(resolve => { confirmResolver = resolve; });
+        }
+
+        function resolveConfirm(result) {
+            document.getElementById('confirm-modal').classList.remove('show');
+            if (confirmResolver) {
+                const resolve = confirmResolver;
+                confirmResolver = null;
+                resolve(result);
+            }
+        }
+
+        function openLightbox(url) {
+            document.getElementById('lightbox-img').src = url;
+            document.getElementById('lightbox').classList.add('show');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('show');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Escape') return;
+            closeLightbox();
+            if (confirmResolver) resolveConfirm(false);
+        });
+
+        // ============ 统一请求与错误处理 ============
+
+        // 统一POST：把后端的 HTTPException detail 取出来抛成异常，
+        // 否则 400 响应会被静默忽略（用户点按钮没有任何反应）
+        async function postJSON(url, payload) {
+            const options = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            };
+            if (payload !== undefined) {
+                options.body = JSON.stringify(payload);
+            }
+            const response = await fetch(url, options);
+            let data = {};
+            try {
+                data = await response.json();
+            } catch (e) {
+                // 响应不是JSON，保持空对象
+            }
+            if (!response.ok) {
+                const err = new Error(data.detail || `请求失败（HTTP ${response.status}）`);
+                err.status = response.status;
+                err.detail = data.detail || '';
+                throw err;
+            }
+            return data;
+        }
+
+        // 缺少API密钥时，提示并直接打开管理弹窗
+        function isMissingKeyError(error) {
+            const detail = error && (error.detail || error.message) || '';
+            return detail.indexOf('API密钥') !== -1 || detail.indexOf('密钥未配置') !== -1;
+        }
+
+        function reportError(prefix, error) {
+            if (isMissingKeyError(error)) {
+                showToast('还没有可用的API密钥，请先添加模型并填写密钥', 'error');
+                openModelModal();
+                return;
+            }
+            showToast(prefix + ': ' + (error.detail || error.message), 'error');
+        }
+
+        // ============ 模型与API管理 ============
+
+        let models = [];
+        let editingModelId = null;
+
+        async function loadModels() {
+            try {
+                const response = await fetch('/api/models');
+                const data = await response.json();
+                models = data.models || [];
+            } catch (error) {
+                models = [];
+                showToast('加载模型列表失败: ' + error.message, 'error');
+            }
+            renderCurrentModel();
+            renderModelSwitch();
+            renderModelList();
+            // 换了图片模型后，「基于原图编辑」是否可选会变，重绘一次图片卡片
+            if (state.images.length > 0) renderGeneratedImages();
+        }
+
+        let modelListTab = 'text';
+
+        function modelType(model) {
+            return model.model_type || 'text';
+        }
+
+        // 图片和视频在界面上归为一类（都属于"图片视频生成模型"）
+        function isVisualModel(model) {
+            const t = modelType(model);
+            return t === 'image' || t === 'video';
+        }
+
+        // 每个分类各自有一个"使用中"的模型，不能全局只取一个
+        function getDefaultModel(type) {
+            if (type === 'image') {
+                return models.find(m => isVisualModel(m) && m.is_default && m.enabled) || null;
+            }
+            return models.find(m => modelType(m) === type && m.is_default && m.enabled) || null;
+        }
+
+        function hasKey(model) {
+            return !!(model.api_key && model.api_key.length > 0);
+        }
+
+        function typeLabel(type) {
+            return { text: '文本', image: '图片', video: '视频' }[type] || type;
+        }
+
+        function typeBadge(model) {
+            const t = modelType(model);
+            const cls = { text: 'badge-text-model', image: 'badge-image-model', video: 'badge-video-model' }[t] || 'badge-text-model';
+            const label = { text: '文本', image: '图片', video: '视频' }[t] || t;
+            return `<span class="model-type-badge ${cls}">${label}</span>`;
+        }
+
+        function renderCurrentModel() {
+            renderCurrentModelFor('text', 'current-text-model');
+            renderCurrentModelFor('image', 'current-image-model');
+        }
+
+        function renderCurrentModelFor(type, elementId) {
+            const el = document.getElementById(elementId);
+            const model = getDefaultModel(type);
+            if (!model) {
+                el.innerHTML = `<span class="model-none">⚠️ 未配置${typeLabel(type)}模型</span>`;
+                return;
+            }
+            if (!hasKey(model)) {
+                el.innerHTML = `${escapeHtml(model.name)}<br><span class="model-none">⚠️ 未填写API密钥</span>`;
+                return;
+            }
+            el.innerHTML = `✅ ${escapeHtml(model.name)}<br><span style="color:#95a5a6;">${escapeHtml(model.provider)}</span>`;
+        }
+
+        function renderModelSwitch() {
+            renderModelSwitchFor('text', 'text-model-select');
+            renderModelSwitchFor('image', 'image-model-select');
+        }
+
+        function renderModelSwitchFor(type, selectId) {
+            const select = document.getElementById(selectId);
+            const current = getDefaultModel(type);
+            const usable = models.filter(m =>
+                m.enabled && (type === 'image' ? isVisualModel(m) : modelType(m) === type)
+            );
+            if (usable.length === 0) {
+                select.innerHTML = `<option value="">暂无可用${typeLabel(type)}模型</option>`;
+                return;
+            }
+            select.innerHTML = usable.map(m => `
+                <option value="${escapeHtml(m.id)}"${current && current.id === m.id ? ' selected' : ''}>
+                    ${escapeHtml(m.name)}${hasKey(m) ? '' : '（无密钥）'}
+                </option>
+            `).join('');
+        }
+
+        function setModelListTab(type) {
+            modelListTab = type;
+            document.querySelectorAll('.model-type-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.type === type);
+            });
+            renderModelList();
+        }
+
+        function renderModelList() {
+            const container = document.getElementById('model-list');
+            const shown = models.filter(m =>
+                modelListTab === 'image' ? isVisualModel(m) : modelType(m) === 'text'
+            );
+            if (shown.length === 0) {
+                const label = modelListTab === 'image' ? '图片/视频' : '文本';
+                container.innerHTML = `<div class="model-empty">还没有配置${label}生成模型，请在上方表单中添加（模型分类选「${label}」）。</div>`;
+                return;
+            }
+            container.innerHTML = shown.map(m => {
+                const missingKey = !hasKey(m);
+                const classes = ['model-row'];
+                if (m.is_default) classes.push('is-default');
+                if (missingKey) classes.push('no-key');
+                const badges = [
+                    m.is_default ? '<span class="model-badge badge-default">使用中</span>' : '',
+                    missingKey ? '<span class="model-badge badge-nokey">缺少密钥</span>' : '',
+                    m.enabled ? '' : '<span class="model-badge badge-off">已停用</span>'
+                ].join('');
+                const id = escapeHtml(m.id);
+                return `
+                    <div class="${classes.join(' ')}">
+                        <div class="model-row-top">
+                            <div>
+                                <span class="model-row-name">${escapeHtml(m.name)}</span>${typeBadge(m)}${badges}
+                                <div class="model-row-meta">
+                                    供应商：${escapeHtml(m.provider)}　模型ID：${id}<br>
+                                    API地址：${escapeHtml(m.base_url)}<br>
+                                    接口风格：${escapeHtml(m.api_style || 'openai')}${isVisualModel(m) ? `　原图编辑：${m.supports_edit ? '支持' : '不支持'}` : ''}<br>
+                                    密钥：${missingKey ? '未填写' : escapeHtml(m.api_key)}
+                                </div>
+                            </div>
+                            <div class="model-row-actions">
+                                ${m.is_default ? '' : `<button class="btn btn-primary btn-sm" onclick="switchModel('${id}')">设为使用中</button>`}
+                                <button class="btn btn-outline btn-sm" onclick="startEditModel('${id}')">编辑</button>
+                                <button class="btn btn-outline btn-sm" onclick="testModel('${id}', this)">测试连接</button>
+                                <button class="btn btn-secondary btn-sm" onclick="toggleModel('${id}', ${!m.enabled})">${m.enabled ? '停用' : '启用'}</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteModel('${id}')">删除</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openModelModal() {
+            document.getElementById('model-modal').classList.add('show');
+            loadModels();
+        }
+
+        function closeModelModal() {
+            document.getElementById('model-modal').classList.remove('show');
+            resetModelForm();
+        }
+
+        // 图片模型才需要问「是否支持原图编辑」，同时给个接口风格的默认建议
+        function onModelTypeChange() {
+            const type = document.getElementById('mf-model-type').value;
+            document.getElementById('mf-edit-row').style.display =
+                (type === 'image' || type === 'video') ? '' : 'none';
+            document.getElementById('mf-style-hint').textContent = (type === 'image' || type === 'video')
+                ? 'OpenAI 兼容对应 /images/generations；通义万相请选 DashScope'
+                : '不确定就选 OpenAI 兼容';
+        }
+
+        function resetModelForm() {
+            editingModelId = null;
+            ['mf-name', 'mf-provider', 'mf-model-id', 'mf-base-url', 'mf-api-key'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            document.getElementById('mf-model-id').disabled = false;
+            // 表单默认跟着当前正在看的分类页签，少一次切换
+            document.getElementById('mf-model-type').value = modelListTab === 'image' ? 'image' : 'text';
+            document.getElementById('mf-api-style').value = 'openai';
+            document.getElementById('mf-supports-edit').checked = false;
+            document.getElementById('mf-quality').value = '';
+            onModelTypeChange();
+            document.getElementById('model-form-title').textContent = '➕ 添加新模型';
+            document.getElementById('mf-submit-btn').textContent = '保存模型';
+            document.getElementById('mf-key-required').style.display = '';
+            document.getElementById('mf-key-hint').textContent = '密钥保存在本机 user_config/models.json，不会上传到其他地方';
+        }
+
+        function startEditModel(modelId) {
+            const model = models.find(m => m.id === modelId);
+            if (!model) return;
+            editingModelId = modelId;
+            document.getElementById('mf-name').value = model.name;
+            document.getElementById('mf-provider').value = model.provider;
+            document.getElementById('mf-model-id').value = model.id;
+            document.getElementById('mf-model-id').disabled = true;
+            document.getElementById('mf-base-url').value = model.base_url;
+            document.getElementById('mf-api-key').value = '';
+            document.getElementById('mf-model-type').value = modelType(model);
+            document.getElementById('mf-api-style').value = model.api_style || 'openai';
+            document.getElementById('mf-supports-edit').checked = !!model.supports_edit;
+            document.getElementById('mf-quality').value = model.quality || '';
+            onModelTypeChange();
+            document.getElementById('model-form-title').textContent = '✏️ 编辑模型：' + model.name;
+            document.getElementById('mf-submit-btn').textContent = '保存修改';
+            document.getElementById('mf-key-required').style.display = 'none';
+            document.getElementById('mf-key-hint').textContent = hasKey(model)
+                ? '留空表示不修改已保存的密钥'
+                : '该模型还没有密钥，请填写后才能调用';
+            document.getElementById('model-modal').scrollTop = 0;
+        }
+
+        async function submitModelForm() {
+            const name = document.getElementById('mf-name').value.trim();
+            const provider = document.getElementById('mf-provider').value.trim();
+            const modelId = document.getElementById('mf-model-id').value.trim();
+            const baseUrl = document.getElementById('mf-base-url').value.trim();
+            const apiKey = document.getElementById('mf-api-key').value.trim();
+            const modelTypeValue = document.getElementById('mf-model-type').value;
+            const apiStyle = document.getElementById('mf-api-style').value;
+            const supportsEdit = document.getElementById('mf-supports-edit').checked;
+            const quality = document.getElementById('mf-quality').value;
+            const btn = document.getElementById('mf-submit-btn');
+
+            if (!name || !provider || !modelId || !baseUrl) {
+                showToast('请填写名称、供应商、模型ID和API地址', 'error');
+                return;
+            }
+            if (!editingModelId && !apiKey) {
+                showToast('请填写API密钥', 'error');
+                return;
+            }
+
+            const isVisual = modelTypeValue === 'image' || modelTypeValue === 'video';
+
+            btn.disabled = true;
+            try {
+                if (editingModelId) {
+                    const payload = {
+                        name, provider, base_url: baseUrl,
+                        model_type: modelTypeValue,
+                        api_style: apiStyle
+                    };
+                    if (isVisual) {
+                        payload.supports_edit = supportsEdit;
+                        payload.quality = quality;
+                    }
+                    if (apiKey) payload.api_key = apiKey;
+                    const response = await fetch(`/api/models/${encodeURIComponent(editingModelId)}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await response.json().catch(() => ({}));
+                    if (!response.ok) throw new Error(data.detail || `HTTP ${response.status}`);
+                    showToast('模型已更新', 'success');
+                } else {
+                    const payload = {
+                        name, provider, base_url: baseUrl, api_key: apiKey, model_id: modelId,
+                        model_type: modelTypeValue,
+                        api_style: apiStyle
+                    };
+                    if (isVisual) {
+                        payload.supports_edit = supportsEdit;
+                        payload.quality = quality;
+                    }
+                    await postJSON('/api/models', payload);
+                    showToast('模型添加成功', 'success');
+                }
+                // 保存后停留在这个模型所属的分类页签上
+                setModelListTab(isVisual ? 'image' : 'text');
+                resetModelForm();
+                await loadModels();
+            } catch (error) {
+                showToast('保存失败: ' + (error.detail || error.message), 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function switchModel(modelId) {
+            if (!modelId) return;
+            try {
+                const data = await postJSON('/api/models/use', { model_id: modelId });
+                showToast(data.message || '已切换模型', 'success');
+                await loadModels();
+            } catch (error) {
+                showToast('切换失败: ' + (error.detail || error.message), 'error');
+                await loadModels();
+            }
+        }
+
+        async function toggleModel(modelId, enabled) {
+            try {
+                const response = await fetch(`/api/models/${encodeURIComponent(modelId)}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ enabled })
+                });
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(data.detail || `HTTP ${response.status}`);
+                showToast(enabled ? '模型已启用' : '模型已停用', 'success');
+                await loadModels();
+            } catch (error) {
+                showToast('操作失败: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteModel(modelId) {
+            const model = models.find(m => m.id === modelId);
+            if (!confirm(`确定删除模型「${model ? model.name : modelId}」？该操作不可撤销。`)) return;
+            try {
+                const response = await fetch(`/api/models/${encodeURIComponent(modelId)}`, { method: 'DELETE' });
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(data.detail || `HTTP ${response.status}`);
+                showToast('模型已删除', 'success');
+                if (editingModelId === modelId) resetModelForm();
+                await loadModels();
+            } catch (error) {
+                showToast('删除失败: ' + error.message, 'error');
+            }
+        }
+
+        async function testModel(modelId, btn) {
+            const original = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = '测试中...';
+            try {
+                const data = await postJSON(`/api/models/test?model_id=${encodeURIComponent(modelId)}`);
+                showToast(data.message || '连接正常', data.success === false ? 'error' : 'success');
+                // 失败原因往往需要慢慢读（尤其是中转站上游问题），toast 3秒不够
+                if (data.success === false) {
+                    showTestDiagnosis(modelId, data.message, data.diagnosis);
+                } else {
+                    clearTestDiagnosis();
+                }
+            } catch (error) {
+                showToast('测试失败: ' + (error.detail || error.message), 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = original;
+            }
+        }
+
+        // 把测试失败的原因留在弹窗里，附上「该找谁解决」的判断
+        function showTestDiagnosis(modelId, message, diagnosis) {
+            const model = models.find(m => m.id === modelId);
+            const box = document.getElementById('test-diagnosis');
+            if (!box) return;
+            box.style.display = 'block';
+            box.innerHTML = `
+                <strong>❌ 「${escapeHtml(model ? model.name : modelId)}」连接测试失败</strong>
+                <div style="margin-top:8px;font-family:monospace;font-size:12px;word-break:break-all;">
+                    ${escapeHtml(message || '')}
+                </div>
+                ${diagnosis ? `<div style="margin-top:10px;padding:10px;background:#fff;border-radius:6px;">
+                    💡 ${escapeHtml(diagnosis)}
+                </div>` : ''}
+                <button class="btn btn-secondary btn-sm" style="margin-top:10px;" onclick="clearTestDiagnosis()">知道了</button>
+            `;
+        }
+
+        function clearTestDiagnosis() {
+            const box = document.getElementById('test-diagnosis');
+            if (box) {
+                box.style.display = 'none';
+                box.innerHTML = '';
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text == null ? '' : String(text);
+            return div.innerHTML;
+        }
+        
+        // 加载配置
+        async function loadConfig() {
+            try {
+                const response = await fetch('/api/config');
+                const data = await response.json();
+                
+                // 填充下拉框
+                populateSelect('platform-select', data.platforms);
+                populateSelect('column-select', data.columns);
+                populateSelect('audience-select', data.audiences);
+                populateSelect('brand-select', data.brands);
+                
+                // 填充侧边栏
+                renderSidebar(data);
+            } catch (error) {
+                showToast('加载配置失败: ' + error.message, 'error');
+            }
+        }
+        
+        function populateSelect(selectId, items) {
+            const select = document.getElementById(selectId);
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item;
+                option.textContent = item;
+                select.appendChild(option);
+            });
+        }
+        
+        function renderSidebar(data) {
+            document.getElementById('brand-list').innerHTML = 
+                data.brands.map(b => `<div class="config-item">• ${b}</div>`).join('');
+            document.getElementById('platform-list').innerHTML = 
+                data.platforms.map(p => `<div class="config-item">• ${p}</div>`).join('');
+            document.getElementById('column-list').innerHTML = 
+                data.columns.map(c => `<div class="config-item">• ${c}</div>`).join('');
+            document.getElementById('audience-list').innerHTML = 
+                data.audiences.map(a => `<div class="config-item">• ${a}</div>`).join('');
+        }
+        
+        // 加载历史任务
+        async function loadHistory() {
+            try {
+                const response = await fetch('/api/tasks');
+                const tasks = await response.json();
+                
+                const container = document.getElementById('history-sidebar');
+                if (tasks.length === 0) {
+                    container.innerHTML = '<div class="config-item" style="color: #95a5a6;">暂无历史任务</div>';
+                } else {
+                    container.innerHTML = tasks.slice(0, 10).map(t => {
+                        const steps = (t.completed_steps || []).length;
+                        const imgs = t.image_count || 0;
+                        return `
+                        <div class="config-item" style="cursor: pointer;" onclick="viewHistory('${t.task_id}')"
+                             title="点击查看并可继续该任务">
+                            • ${escapeHtml(t.platform || '未知平台')} - ${escapeHtml((t.topic || '无标题').substring(0, 10))}...
+                            <div style="font-size:10px;color:#7f8c8d;">${steps}/5 步${imgs > 0 ? ` · ${imgs}张图` : ''}</div>
+                        </div>
+                        `;
+                    }).join('');
+                }
+            } catch (error) {
+                console.error('加载历史任务失败:', error);
+            }
+        }
+        
+        // 查看历史任务
+        async function viewHistory(taskId) {
+            try {
+                const response = await fetch(`/api/tasks/${taskId}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const task = await response.json();
+
+                const steps = task.steps || {};
+                const done = ['generate_topics', 'generate_outline', 'generate_script', 'generate_image_prompts']
+                    .filter(k => steps[k]).length;
+
+                document.getElementById('history-modal-body').innerHTML = `
+                    <div style="margin-bottom:16px;padding:14px;background:#e8f4f8;border-radius:8px;">
+                        <div style="font-size:14px;margin-bottom:10px;">
+                            该任务已完成 <strong>${done}/4</strong> 个创作步骤，
+                            已生成 <strong>${(task.images || []).length}</strong> 张图片。
+                        </div>
+                        <button class="btn btn-primary btn-sm" onclick="resumeTask('${escapeHtml(taskId)}')">
+                            📂 载入这个任务继续编辑
+                        </button>
+                    </div>
+                    <pre>${escapeHtml(JSON.stringify(task, null, 2))}</pre>
+                `;
+                document.getElementById('history-modal').classList.add('show');
+            } catch (error) {
+                showToast('加载任务详情失败', 'error');
+            }
+        }
+
+        // 把历史任务读回前端状态，这样可以在五个步骤之间随意跳转继续做
+        async function resumeTask(taskId) {
+            try {
+                const response = await fetch(`/api/tasks/${taskId}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const task = await response.json();
+                const steps = task.steps || {};
+                const resultOf = key => (steps[key] && steps[key].result) || {};
+
+                const topicRes = resultOf('generate_topics');
+                const outlineRes = resultOf('generate_outline');
+                const scriptRes = resultOf('generate_script');
+                const promptRes = resultOf('generate_image_prompts');
+                const input = task.input || {};
+
+                state.taskId = task.task_id;
+                state.topics = topicRes.topics || [];
+                state.selectedTopic = scriptRes.selected_topic || outlineRes.selected_topic || null;
+                state.outline = outlineRes.outline || '';
+                state.script = scriptRes.script || '';
+                state.violations = scriptRes.violations || [];
+                state.imagePrompts = promptRes.image_prompts || [];
+                state.complianceReminder = promptRes.compliance_reminder || '';
+                state.images = task.images || [];
+                state.exportedMarkdown = '';
+
+                // 回填表单，后续重新生成才能带上正确的平台/栏目/人群
+                setSelectValue('platform-select', input.platform);
+                setSelectValue('column-select', input.column);
+                setSelectValue('audience-select', input.target_audience);
+                setSelectValue('brand-select', input.brand);
+                document.getElementById('topic-input').value = input.topic || '';
+
+                if (state.topics.length > 0) {
+                    renderTopics(state.topics);
+                    document.getElementById('topics-container').style.display = 'block';
+                    document.getElementById('confirm-topic-btn').disabled = !state.selectedTopic;
+                }
+                if (state.selectedTopic) {
+                    document.getElementById('selected-topic-info').innerHTML = `
+                        <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                            <strong>已选选题：</strong>${escapeHtml(state.selectedTopic.title || state.selectedTopic.选题标题 || '未命名选题')}
+                        </div>
+                    `;
+                }
+                document.getElementById('outline-textarea').value = state.outline;
+                document.getElementById('script-display').textContent = state.script || '脚本内容加载中...';
+                renderViolations(state.violations);
+                renderImagePrompts(state.imagePrompts);
+                renderGeneratedImages();
+
+                closeHistoryModal();
+
+                // 落在最后一个有数据的步骤上
+                let target = 1;
+                for (let s = 1; s <= 4; s++) {
+                    if (hasStepData(s)) target = s;
+                }
+                goToStep(target);
+                showToast(`已载入任务，可以在进度条上任意跳转继续编辑`, 'success');
+            } catch (error) {
+                showToast('载入任务失败: ' + error.message, 'error');
+            }
+        }
+
+        // 下拉框里没有这个值时（配置改过），补一个选项，避免静默丢失
+        function setSelectValue(selectId, value) {
+            const select = document.getElementById(selectId);
+            if (!select) return;
+            if (!value) {
+                select.value = '';
+                return;
+            }
+            const exists = Array.from(select.options).some(o => o.value === value);
+            if (!exists) {
+                const option = document.createElement('option');
+                option.value = value;
+                option.textContent = value;
+                select.appendChild(option);
+            }
+            select.value = value;
+        }
+
+        function closeHistoryModal() {
+            document.getElementById('history-modal').classList.remove('show');
+        }
+        
+        // ============ 步骤跳转与重新生成确认 ============
+
+        const STEP_DATA_LABELS = { 1: '选题', 2: '大纲', 3: '脚本', 4: '图片提示词', 5: '物料包' };
+
+        // 某一步是否已经有结果
+        function hasStepData(step) {
+            switch (step) {
+                case 1: return state.topics.length > 0;
+                case 2: return !!state.outline;
+                case 3: return !!state.script;
+                case 4: return state.imagePrompts.length > 0;
+                case 5: return !!state.exportedMarkdown;
+                default: return false;
+            }
+        }
+
+        // 跳过去之后那一步能不能正常工作（缺少上游数据时不放行）
+        function stepAvailable(step) {
+            switch (step) {
+                case 1: return true;
+                case 2: return !!state.selectedTopic || !!state.outline;
+                case 3: return !!state.outline || !!state.script;
+                case 4: return !!state.script;
+                case 5: return !!state.script;
+                default: return false;
+            }
+        }
+
+        function missingReason(step) {
+            if (step === 2) return '请先在第1步生成并选择一条选题';
+            if (step === 3) return '请先在第2步生成大纲';
+            if (step === 4 || step === 5) return '请先在第3步生成脚本';
+            return '该步骤暂时不可用';
+        }
+
+        // 重新生成前的二次确认：明确告诉用户会替换掉什么
+        async function confirmRegenerate(step) {
+            if (!hasStepData(step)) return true;
+
+            const downstream = [];
+            for (let s = step + 1; s <= 5; s++) {
+                if (hasStepData(s)) downstream.push(STEP_DATA_LABELS[s]);
+            }
+            if (step <= 4 && state.images.length > 0) {
+                downstream.push(`${state.images.length} 张已生成的图片`);
+            }
+
+            let text = `当前任务已经有「${STEP_DATA_LABELS[step]}」的结果了。\n`
+                + `重新生成会用新的结果替换掉现在这一份，旧内容不会保留。`;
+            if (downstream.length > 0) {
+                text += `\n\n因为后面的内容是基于它产生的，这些也会一并清空：\n· ${downstream.join('\n· ')}`;
+            }
+            text += '\n\n确定要重新生成吗？';
+
+            return await askConfirm(text, `确认重新生成${STEP_DATA_LABELS[step]}`);
+        }
+
+        // 进度条点击：任意步骤间来回跳
+        function jumpToStep(step) {
+            if (!stepAvailable(step)) {
+                showToast(missingReason(step), 'error');
+                return;
+            }
+            goToStep(step);
+
+            const hint = document.getElementById('jump-hint');
+            if (hasStepData(step)) {
+                hint.style.display = 'block';
+                hint.innerHTML = `已跳转到第${step}步「${escapeHtml(STEP_TITLES[step])}」。`
+                    + `这一步已有结果，直接点生成会提示你是否替换掉现有内容。`;
+            } else {
+                hint.style.display = 'none';
+            }
+        }
+
+        // 进度条状态：已完成打勾、有数据加绿点、缺上游的置灰
+        function renderProgress() {
+            document.querySelectorAll('.progress-step').forEach(el => {
+                const step = parseInt(el.dataset.step, 10);
+                el.classList.remove('active', 'completed', 'locked', 'has-data');
+
+                if (step === state.currentStep) {
+                    el.classList.add('active');
+                } else if (hasStepData(step)) {
+                    el.classList.add('completed');
+                }
+                if (hasStepData(step)) el.classList.add('has-data');
+                if (!stepAvailable(step)) el.classList.add('locked');
+
+                el.title = stepAvailable(step)
+                    ? (hasStepData(step) ? `点击跳转到第${step}步（已有结果）` : `点击跳转到第${step}步`)
+                    : missingReason(step);
+            });
+
+            for (let s = 1; s <= 5; s++) {
+                const el = document.getElementById(`step-${s}-status`);
+                if (!el) continue;
+                if (s === state.currentStep) {
+                    el.textContent = '进行中';
+                    el.className = 'step-status in-progress';
+                } else if (hasStepData(s)) {
+                    el.textContent = '已完成';
+                    el.className = 'step-status completed';
+                } else {
+                    el.textContent = '待处理';
+                    el.className = 'step-status';
+                }
+            }
+        }
+
+        // 步骤1: 生成选题
+        async function generateTopics() {
+            const platform = document.getElementById('platform-select').value;
+            const column = document.getElementById('column-select').value;
+            const audience = document.getElementById('audience-select').value;
+            const topic = document.getElementById('topic-input').value.trim();
+            const brand = document.getElementById('brand-select').value;
+
+            if (!platform || !column || !audience || !topic) {
+                showToast('请填写完整信息', 'error');
+                return;
+            }
+
+            if (!await confirmRegenerate(1)) return;
+
+            const btn = document.getElementById('generate-topics-btn');
+            btn.disabled = true;
+            btn.innerHTML = '⏳ 生成中...';
+
+            try {
+                const data = await postJSON('/api/topics', {
+                    task_id: state.taskId,
+                    platform, column, target_audience: audience, topic, brand
+                });
+
+                if (data.topics) {
+                    // 五个步骤共用一个 task_id，导出时才能把内容串起来
+                    state.taskId = data.task_id;
+                    state.topics = data.topics;
+                    // 重新生成选题后，下游结果在后端已被清空，前端同步清掉
+                    state.selectedTopic = null;
+                    state.outline = '';
+                    state.script = '';
+                    state.violations = [];
+                    state.imagePrompts = [];
+                    state.images = [];
+                    state.exportedMarkdown = '';
+                    document.getElementById('confirm-topic-btn').disabled = true;
+                    renderTopics(data.topics);
+                    document.getElementById('topics-container').style.display = 'block';
+                    renderProgress();
+                    showToast('选题生成成功，请选择一条选题', 'success');
+                }
+            } catch (error) {
+                reportError('生成选题失败', error);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '🎯 生成选题建议';
+            }
+        }
+        
+        function renderTopics(topics) {
+            const container = document.getElementById('topics-list');
+            container.innerHTML = topics.map((topic, index) => `
+                <div class="topic-item" data-index="${index}" onclick="selectTopic(${index})">
+                    <input type="radio" name="topic" onclick="event.stopPropagation(); selectTopic(${index})">
+                    <div class="topic-title">${escapeHtml(topic.title || topic.选题标题 || `选题 ${index + 1}`)}</div>
+                    <div class="topic-meta">
+                        <span>平台: ${escapeHtml(topic.platform || topic.适配平台 || '通用')}</span>
+                        <span>受众: ${escapeHtml(topic.audience || topic.目标受众 || '通用')}</span>
+                    </div>
+                    ${topic.core_idea || topic.核心立意 ? `<div style="margin-top: 8px; font-size: 14px;">${escapeHtml(topic.core_idea || topic.核心立意)}</div>` : ''}
+                    ${topic.risk || topic.潜在合规风险提示 ? `<div class="topic-risk">⚠️ 合规提示: ${escapeHtml(topic.risk || topic.潜在合规风险提示)}</div>` : ''}
+                </div>
+            `).join('');
+        }
+        
+        function selectTopic(index) {
+            // 移除其他选中状态
+            document.querySelectorAll('.topic-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // 设置选中状态
+            const selectedItem = document.querySelector(`.topic-item[data-index="${index}"]`);
+            selectedItem.classList.add('selected');
+            selectedItem.querySelector('input').checked = true;
+            
+            state.selectedTopic = state.topics[index];
+            document.getElementById('confirm-topic-btn').disabled = false;
+            // 选中选题后第2步才可达，刷新进度条的可点击状态
+            renderProgress();
+        }
+        
+        function confirmTopic() {
+            if (!state.selectedTopic) {
+                showToast('请先选择一条选题', 'error');
+                return;
+            }
+            requestOutline('confirm-topic-btn');
+        }
+        
+        // 步骤2: 生成大纲
+        // 从第1步「确认选题」和第2步「重新生成大纲」两个入口共用
+        async function requestOutline(buttonId) {
+            if (!state.selectedTopic) {
+                showToast('请先回到第1步选择一条选题', 'error');
+                return;
+            }
+            if (!await confirmRegenerate(2)) return;
+
+            const btn = document.getElementById(buttonId || 'confirm-topic-btn');
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ 生成大纲中...';
+
+            try {
+                const feedbackEl = document.getElementById('outline-feedback');
+                const data = await postJSON('/api/outline', {
+                    task_id: state.taskId,
+                    selected_topic: state.selectedTopic,
+                    platform: document.getElementById('platform-select').value,
+                    column: document.getElementById('column-select').value,
+                    target_audience: document.getElementById('audience-select').value,
+                    outline_feedback: (feedbackEl.value || '').trim() || null
+                });
+
+                if (data.outline) {
+                    state.taskId = data.task_id;
+                    state.outline = data.outline;
+                    // 后端已清掉下游，前端同步
+                    state.script = '';
+                    state.violations = [];
+                    state.imagePrompts = [];
+                    state.images = [];
+                    state.exportedMarkdown = '';
+
+                    document.getElementById('selected-topic-info').innerHTML = `
+                        <div style="background: #e8f4f8; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                            <strong>已选选题：</strong>${escapeHtml(state.selectedTopic.title || state.selectedTopic.选题标题 || '未命名选题')}
+                        </div>
+                    `;
+                    document.getElementById('outline-textarea').value = data.outline;
+                    goToStep(2);
+                    showToast('大纲生成成功，请审核确认', 'success');
+                }
+            } catch (error) {
+                reportError('生成大纲失败', error);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = original;
+            }
+        }
+
+        function confirmOutline() {
+            // 用户可能手动改过大纲，以文本框内容为准
+            state.outline = document.getElementById('outline-textarea').value.trim();
+            if (!state.outline) {
+                showToast('大纲内容为空，请先生成或手动填写大纲', 'error');
+                return;
+            }
+            requestScript('confirm-outline-btn');
+        }
+
+        // 步骤3: 生成脚本
+        async function requestScript(buttonId) {
+            if (!state.outline) {
+                state.outline = document.getElementById('outline-textarea').value.trim();
+            }
+            if (!state.outline) {
+                showToast('请先在第2步准备好大纲', 'error');
+                return;
+            }
+            if (!await confirmRegenerate(3)) return;
+
+            const btn = document.getElementById(buttonId || 'regen-script-btn');
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ 生成脚本中...';
+
+            try {
+                // 第2步的大纲反馈已经用在大纲上了，这里单独收集脚本反馈
+                const scriptFeedbackEl = document.getElementById('script-feedback');
+                const data = await postJSON('/api/script', {
+                    task_id: state.taskId,
+                    outline: state.outline,
+                    selected_topic: state.selectedTopic,
+                    platform: document.getElementById('platform-select').value,
+                    column: document.getElementById('column-select').value,
+                    target_audience: document.getElementById('audience-select').value,
+                    script_feedback: (scriptFeedbackEl.value || '').trim() || null
+                });
+
+                if (data.script) {
+                    state.taskId = data.task_id;
+                    state.script = data.script;
+                    state.violations = data.violations || [];
+                    state.imagePrompts = [];
+                    state.images = [];
+                    state.exportedMarkdown = '';
+
+                    document.getElementById('script-display').textContent = data.script;
+                    renderViolations(data.violations);
+                    renderImagePrompts([]);
+                    renderGeneratedImages();
+                    goToStep(3);
+                    showToast('脚本生成完成，请查看合规扫描结果', 'success');
+                }
+            } catch (error) {
+                reportError('生成脚本失败', error);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = original;
+            }
+        }
+        
+        function renderViolations(violations) {
+            const container = document.getElementById('compliance-warning');
+            const listContainer = document.getElementById('violations-list');
+            
+            if (!violations || violations.length === 0) {
+                container.className = 'compliance-warning no-risk';
+                listContainer.innerHTML = '<div style="color: #27ae60;">✅ 未检测到违规内容，脚本合规</div>';
+            } else {
+                container.className = 'compliance-warning has-risk';
+                listContainer.innerHTML = violations.map(v => `
+                    <div class="violation-item ${escapeHtml(v.severity)}">
+                        <span class="violation-word">${escapeHtml(v.word)}</span>
+                        <span class="violation-desc">${escapeHtml(v.description)} → ${escapeHtml(v.action)}</span>
+                    </div>
+                `).join('');
+                showToast('检测到违规内容，请务必仔细审核！', 'error');
+            }
+        }
+        
+        // 步骤4: 生成图片提示词
+        async function requestImagePrompts(buttonId) {
+            if (!state.script) {
+                showToast('请先在第3步生成脚本', 'error');
+                return;
+            }
+            if (!await confirmRegenerate(4)) return;
+
+            const btn = document.getElementById(buttonId || (state.currentStep === 4 ? 'regen-prompts-btn' : 'proceed-image-btn'));
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ 生成图片提示词中...';
+
+            try {
+                const count = parseInt(document.getElementById('prompt-count-select').value, 10) || 4;
+                const data = await postJSON('/api/image-prompts', {
+                    task_id: state.taskId,
+                    script: state.script,
+                    selected_topic: state.selectedTopic,
+                    platform: document.getElementById('platform-select').value,
+                    prompt_count: count
+                });
+
+                if (data.image_prompts) {
+                    state.taskId = data.task_id;
+                    state.imagePrompts = data.image_prompts;
+                    state.complianceReminder = data.compliance_reminder || '';
+                    // 提示词变了，之前基于旧提示词出的图后端已清空
+                    state.images = [];
+                    state.exportedMarkdown = '';
+                    renderImagePrompts(data.image_prompts);
+                    renderGeneratedImages();
+                    goToStep(4);
+                    showToast('图片提示词生成完成，可以选一套出图了', 'success');
+                }
+            } catch (error) {
+                reportError('生成图片提示词失败', error);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = original;
+            }
+        }
+
+        const SIZE_OPTIONS = [
+            { value: '1024x1024', label: '1024×1024 方图' },
+            { value: '1024x1792', label: '1024×1792 竖图' },
+            { value: '1792x1024', label: '1792×1024 横图' }
+        ];
+
+        function renderImagePrompts(prompts) {
+            const container = document.getElementById('image-prompts-container');
+            if (!prompts || prompts.length === 0) {
+                container.innerHTML = '<div class="image-empty">还没有图片提示词，点击上方「重新生成图片提示词」开始。</div>';
+                return;
+            }
+            container.innerHTML = prompts.map((prompt, index) => {
+                const recommended = prompt.recommended_size || '1024x1024';
+                const sizeOptions = SIZE_OPTIONS.map(opt =>
+                    `<option value="${opt.value}"${opt.value === recommended ? ' selected' : ''}>${opt.label}</option>`
+                ).join('');
+                const generatedCount = state.images.filter(img => img.prompt_index === index).length;
+                return `
+                <div class="prompt-card${generatedCount > 0 ? ' chosen' : ''}">
+                    <div class="prompt-card-header">
+                        <span class="prompt-card-title">${escapeHtml(prompt.name || prompt.image_type || `图片方案 ${index + 1}`)}</span>
+                        ${generatedCount > 0 ? `<span class="model-type-badge badge-image-model">已出图 ${generatedCount} 张</span>` : ''}
+                    </div>
+                    ${prompt.scene_description ? `
+                        <div class="prompt-section">
+                            <h5>场景描述</h5>
+                            <div class="prompt-content">${escapeHtml(prompt.scene_description)}</div>
+                        </div>
+                    ` : ''}
+                    <div class="prompt-section">
+                        <h5>正向提示词（英文）</h5>
+                        <div class="prompt-content" id="positive-${index}">${escapeHtml(prompt.positive_prompt_en || prompt.positive_prompt || 'N/A')}</div>
+                        <button class="copy-btn" onclick="copyPrompt('positive-${index}', this)">📋 复制</button>
+                    </div>
+                    <div class="prompt-section">
+                        <h5>负面提示词</h5>
+                        <div class="prompt-content" id="negative-${index}">${escapeHtml(prompt.negative_prompt || 'N/A')}</div>
+                        <button class="copy-btn" onclick="copyPrompt('negative-${index}', this)">📋 复制</button>
+                    </div>
+                    <div class="prompt-card-actions">
+                        <label for="size-${index}" style="position:absolute;left:-9999px;">图片尺寸</label>
+                        <select class="image-size-select" id="size-${index}">${sizeOptions}</select>
+                        <button class="btn btn-primary btn-sm" id="gen-img-btn-${index}" onclick="generateImage(${index})">
+                            🎨 用这套提示词生成图片
+                        </button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // ============ 图片生成与优化 ============
+
+        async function generateImage(promptIndex) {
+            if (!state.taskId) {
+                showToast('请先完成前面的步骤', 'error');
+                return;
+            }
+            const imageModel = getDefaultModel('image');
+            if (!imageModel) {
+                showToast('还没有配置图片生成模型，请先在「管理API与模型」中添加', 'error');
+                openModelModal();
+                setModelListTab('image');
+                return;
+            }
+
+            const prompt = state.imagePrompts[promptIndex] || {};
+            const positive = prompt.positive_prompt_en || prompt.positive_prompt || '';
+            if (!positive || positive === 'N/A') {
+                showToast('这套提示词没有可用的正向提示词', 'error');
+                return;
+            }
+
+            const btn = document.getElementById(`gen-img-btn-${promptIndex}`);
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ 出图中（约需30秒～2分钟）...';
+
+            try {
+                const data = await postJSON('/api/images/generate', {
+                    task_id: state.taskId,
+                    prompt_index: promptIndex,
+                    positive_prompt: positive,
+                    negative_prompt: prompt.negative_prompt || null,
+                    size: document.getElementById(`size-${promptIndex}`).value,
+                    model_id: imageModel.id
+                });
+
+                if (data.image) {
+                    state.images.push(data.image);
+                    renderImagePrompts(state.imagePrompts);
+                    renderGeneratedImages();
+                    state.exportedMarkdown = '';
+                    renderProgress();
+                    showToast('图片生成成功，可以在下方继续优化', 'success');
+                    document.getElementById('generated-images').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            } catch (error) {
+                reportError('生成图片失败', error);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = original;
+            }
+        }
+
+        function renderGeneratedImages() {
+            const container = document.getElementById('generated-images');
+            if (state.images.length === 0) {
+                container.innerHTML = '<div class="image-empty">还没有生成图片。在上方任选一套提示词，点击「用这套提示词生成图片」。</div>';
+                return;
+            }
+            const imageModel = getDefaultModel('image');
+            const canEdit = !!(imageModel && imageModel.supports_edit);
+
+            container.innerHTML = state.images.map(img => {
+                const id = escapeHtml(img.image_id);
+                const isOptimized = !!img.parent_image_id;
+                return `
+                <div class="image-card${isOptimized ? ' optimized' : ''}">
+                    <img src="${escapeHtml(img.url)}" alt="${escapeHtml(img.prompt_name || '生成的图片')}"
+                         onclick="openLightbox('${escapeHtml(img.url)}')">
+                    <div class="image-card-body">
+                        <div class="image-card-title">
+                            ${escapeHtml(img.prompt_name || '生成图片')}
+                            ${isOptimized ? '<span class="model-type-badge badge-image-model">优化版</span>' : ''}
+                        </div>
+                        <div class="image-card-meta">
+                            模型：${escapeHtml(img.model_name || img.model_used || 'N/A')}<br>
+                            尺寸：${escapeHtml(img.size || 'N/A')}
+                            ${img.feedback ? `<br>优化意见：${escapeHtml(img.feedback)}` : ''}
+                        </div>
+                        <div class="image-card-actions">
+                            <button class="btn btn-primary btn-sm" onclick="toggleOptimizeBox('${id}')">✨ 优化这张图</button>
+                            <button class="btn btn-outline btn-sm" onclick="openLightbox('${escapeHtml(img.url)}')">🔍 查看</button>
+                            <button class="btn btn-danger btn-sm" onclick="removeImage('${id}')">删除</button>
+                        </div>
+                        <div class="image-optimize-box" id="optimize-box-${id}">
+                            <label for="feedback-${id}" style="font-size:12px;font-weight:600;">修改意见</label>
+                            <textarea id="feedback-${id}" rows="3" placeholder="例如：背景换成浅绿色、光线再柔和一些、构图改成特写"></textarea>
+                            <label for="mode-${id}" style="font-size:12px;font-weight:600;">优化方式</label>
+                            <select class="image-size-select" id="mode-${id}">
+                                <option value="rewrite">改写提示词重绘（文本模型改写后重新出图）</option>
+                                <option value="edit"${canEdit ? '' : ' disabled'}>基于原图编辑${canEdit ? '' : '（当前图片模型不支持）'}</option>
+                            </select>
+                            <div class="image-card-actions">
+                                <button class="btn btn-success btn-sm" id="opt-btn-${id}" onclick="optimizeImage('${id}')">提交优化</button>
+                                <button class="btn btn-secondary btn-sm" onclick="toggleOptimizeBox('${id}')">收起</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function toggleOptimizeBox(imageId) {
+            const box = document.getElementById(`optimize-box-${imageId}`);
+            if (box) box.classList.toggle('show');
+        }
+
+        async function optimizeImage(imageId) {
+            const feedback = (document.getElementById(`feedback-${imageId}`).value || '').trim();
+            if (!feedback) {
+                showToast('请先填写修改意见', 'error');
+                return;
+            }
+            const mode = document.getElementById(`mode-${imageId}`).value;
+
+            const imageModel = getDefaultModel('image');
+            if (!imageModel) {
+                showToast('还没有配置图片生成模型', 'error');
+                return;
+            }
+            const textModel = getDefaultModel('text');
+            if (mode === 'rewrite' && !textModel) {
+                showToast('改写提示词需要文本模型，请先配置文本生成模型', 'error');
+                openModelModal();
+                return;
+            }
+
+            const btn = document.getElementById(`opt-btn-${imageId}`);
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ 优化中...';
+
+            try {
+                const data = await postJSON('/api/images/optimize', {
+                    task_id: state.taskId,
+                    image_id: imageId,
+                    feedback,
+                    mode,
+                    model_id: imageModel.id,
+                    text_model_id: textModel ? textModel.id : null
+                });
+
+                if (data.image) {
+                    state.images.push(data.image);
+                    renderImagePrompts(state.imagePrompts);
+                    renderGeneratedImages();
+                    state.exportedMarkdown = '';
+                    showToast('优化完成，已生成新的一版（原图保留）', 'success');
+                }
+            } catch (error) {
+                reportError('优化图片失败', error);
+            } finally {
+                const stillThere = document.getElementById(`opt-btn-${imageId}`);
+                if (stillThere) {
+                    stillThere.disabled = false;
+                    stillThere.innerHTML = original;
+                }
+            }
+        }
+
+        async function removeImage(imageId) {
+            if (!await askConfirm('删除后这张图片会从任务和物料包中移除，本地文件也会一起删掉。\n\n确定删除吗？', '确认删除', '⚠️ 删除图片')) {
+                return;
+            }
+            try {
+                const response = await fetch(
+                    `/api/images/${encodeURIComponent(state.taskId)}/${encodeURIComponent(imageId)}`,
+                    { method: 'DELETE' }
+                );
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(data.detail || `HTTP ${response.status}`);
+                state.images = state.images.filter(img => img.image_id !== imageId);
+                renderImagePrompts(state.imagePrompts);
+                renderGeneratedImages();
+                state.exportedMarkdown = '';
+                showToast('图片已删除', 'success');
+            } catch (error) {
+                showToast('删除失败: ' + (error.detail || error.message), 'error');
+            }
+        }
+        
+        function copyPrompt(elementId, btn) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.classList.add('copied');
+                btn.textContent = '✅ 已复制';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.textContent = '📋 复制';
+                }, 2000);
+            }).catch(() => {
+                showToast('复制失败，请手动选择复制', 'error');
+            });
+        }
+        
+        // 步骤5: 预览和导出
+        // sourceBtn: 第4步和第5步都能触发预览，禁用点过来的那个按钮
+        async function previewPackage(sourceBtn) {
+            if (!state.taskId || !state.script) {
+                showToast('请先完成脚本生成再导出', 'error');
+                return;
+            }
+
+            const btn = sourceBtn || document.getElementById('preview-package-btn');
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '⏳ 生成预览中...';
+
+            try {
+                // 整条流程共用一个 task_id，这里直接用它取全量内容
+                const data = await postJSON('/api/export', { task_id: state.taskId });
+
+                if (data.markdown) {
+                    document.getElementById('package-content').textContent = data.markdown;
+                    state.exportFilename = data.filename;
+                    state.exportedMarkdown = data.markdown;
+                    goToStep(5);
+                    const imgNote = data.image_count > 0
+                        ? `，已包含 ${data.image_count} 张图片`
+                        : '（暂无已生成图片）';
+                    showToast('物料包生成完成' + imgNote, 'success');
+                }
+            } catch (error) {
+                reportError('生成物料包失败', error);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = original;
+            }
+        }
+
+        function exportPackage() {
+            const content = document.getElementById('package-content').textContent;
+            if (!content || !state.exportedMarkdown) {
+                showToast('请先点击「预览发布物料包」生成内容', 'error');
+                return;
+            }
+            const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = state.exportFilename || `品牌官号物料包_${new Date().format('yyyyMMdd_HHmmss')}.md`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('导出成功！图片以链接形式引用，需连同服务一起查看', 'success');
+            loadHistory();
+        }
+
+        async function startNewTask() {
+            if (state.taskId && state.script) {
+                if (!await askConfirm(
+                    '开始新任务会清空当前页面上的所有内容（当前任务已经保存在历史记录里，可以从左侧重新打开）。\n\n确定要开始新任务吗？',
+                    '确认开始新任务', '🔄 开始新任务'
+                )) return;
+            }
+
+            state.currentStep = 1;
+            state.taskId = null;
+            state.selectedTopic = null;
+            state.topics = [];
+            state.outline = '';
+            state.script = '';
+            state.violations = [];
+            state.imagePrompts = [];
+            state.images = [];
+            state.exportedMarkdown = '';
+            state.exportFilename = '';
+
+            document.getElementById('platform-select').value = '';
+            document.getElementById('column-select').value = '';
+            document.getElementById('audience-select').value = '';
+            document.getElementById('topic-input').value = '';
+            document.getElementById('brand-select').value = '';
+            document.getElementById('outline-textarea').value = '';
+            document.getElementById('outline-feedback').value = '';
+            document.getElementById('script-feedback').value = '';
+            document.getElementById('script-display').textContent = '脚本内容加载中...';
+            document.getElementById('package-content').textContent = '物料包内容加载中...';
+            document.getElementById('topics-container').style.display = 'none';
+            document.getElementById('confirm-topic-btn').disabled = true;
+            document.getElementById('jump-hint').style.display = 'none';
+            renderImagePrompts([]);
+            renderGeneratedImages();
+
+            goToStep(1);
+            showToast('已准备好开始新任务', 'success');
+        }
+
+        // 步骤导航
+        function goToStep(step) {
+            state.currentStep = step;
+
+            document.querySelectorAll('.workflow-step').forEach((el, index) => {
+                el.classList.toggle('active', index + 1 === step);
+            });
+
+            renderProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Toast提示
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // 日期格式化
+        Date.prototype.format = function(fmt) {
+            const o = {
+                'yyyy': this.getFullYear(),
+                'MM': String(this.getMonth() + 1).padStart(2, '0'),
+                'dd': String(this.getDate()).padStart(2, '0'),
+                'HH': String(this.getHours()).padStart(2, '0'),
+                'mm': String(this.getMinutes()).padStart(2, '0'),
+                'ss': String(this.getSeconds()).padStart(2, '0')
+            };
+            for (let k in o) {
+                fmt = fmt.replace(new RegExp(k, 'g'), o[k]);
+            }
+            return fmt;
+        };
+    </script>
+</body>
+</html>

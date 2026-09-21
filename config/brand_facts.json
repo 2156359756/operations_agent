@@ -1,0 +1,74 @@
+{
+  "brands": [
+    {
+      "id": "lofu",
+      "name": "洛芙",
+      "description": "专业痤疮护理品牌",
+      "active_ingredients": ["过氧化苯甲酰", "水杨酸"],
+      "indications": ["轻中度痤疮", "粉刺", "痘痘"],
+      "contraindications": ["重度痤疮患者", "皮肤破损处", "对成分过敏者"],
+      "target_audience": ["18-30岁年轻人", "痤疮困扰人群", "油性肌肤"],
+      "brand_personality": "专业、科学、值得信赖",
+      "key_messages": [
+        "科学战痘",
+        "温和有效",
+        "皮肤科推荐"
+      ]
+    },
+    {
+      "id": "lifu",
+      "name": "丽芙",
+      "description": "敏感肌肤修护专家",
+      "active_ingredients": ["神经酰胺", "透明质酸", "泛醇"],
+      "indications": ["敏感性皮肤", "皮肤屏障受损", "干燥紧绷", "泛红"],
+      "contraindications": ["活动性皮肤感染", "对成分过敏者"],
+      "target_audience": ["敏感肌人群", "换季易过敏者", "追求温和护肤者"],
+      "brand_personality": "温和、呵护、修护",
+      "key_messages": [
+        "温和不刺激",
+        "修护屏障",
+        "敏感肌专用"
+      ]
+    },
+    {
+      "id": "jinniuer",
+      "name": "金纽尔",
+      "description": "高端功效护肤品牌",
+      "active_ingredients": ["视黄醇", "烟酰胺", "VC衍生物", "玻尿酸"],
+      "indications": ["抗衰老", "肤色暗沉", "细纹皱纹", "肌肤老化"],
+      "contraindications": ["孕期哺乳期", "皮肤敏感期", "对维生素A衍生物过敏者"],
+      "target_audience": ["25-45岁抗衰需求人群", "熟龄肌肤", "追求功效性护肤者"],
+      "brand_personality": "高端、专业、功效显著",
+      "key_messages": [
+        "科技抗老",
+        "焕活肌肤",
+        "院线级效果"
+      ]
+    },
+    {
+      "id": "zhirun",
+      "name": "质润",
+      "description": "问题肌肤调理专家",
+      "active_ingredients": ["壬二酸", "果酸", "茶树精油"],
+      "indications": ["痘印色素沉着", "毛孔粗大", "油脂分泌旺盛", "黑头白头"],
+      "contraindications": ["重度敏感肌肤", "皮肤破损", "孕期"],
+      "target_audience": ["油痘肌人群", "有痘印困扰者", "毛孔问题人群"],
+      "brand_personality": "调理、清爽、改善",
+      "key_messages": [
+        "调理肌肤",
+        "改善痘印",
+        "控油细致"
+      ]
+    }
+  ],
+  "company": {
+    "name": "知原药业",
+    "description": "专注于皮肤健康领域的医药企业",
+    "core_values": [
+      "科学研发",
+      "安全有效",
+      "患者为本"
+    ],
+    "medical_compliance_notice": "AI初稿，需业务+医学法规人工审核后方可对外使用"
+  }
+}

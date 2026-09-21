@@ -1,0 +1,94 @@
+{
+  "templates": [
+    {
+      "id": "xiaohongshu_cover",
+      "name": "小红书封面图",
+      "platform": "xiaohongshu",
+      "scene": "笔记封面，吸引点击",
+      "positive_prompt_template": "现代简约风格护肤产品海报设计，画面中央展示{product_name}产品包装，背景为柔和渐变色（{color_scheme}），左上角添加简洁的品牌logo区域，文字区域留白，整体风格精致清新，符合年轻女性审美，高清摄影质感，专业布光",
+      "negative_prompt": "低质量，模糊，变形，水印，文字错误，色情，暴力，医疗内容，治疗效果对比，药品外观，过度美白磨皮，失真，颗粒感，噪点",
+      "aspect_ratio": "3:4",
+      "tips": "封面图需要醒目、有吸引力，能在信息流中脱颖而出"
+    },
+    {
+      "id": "xiaohongshu_insert",
+      "name": "小红书笔记插图",
+      "platform": "xiaohongshu",
+      "scene": "笔记内容配图，增强阅读体验",
+      "positive_prompt_template": "护肤教程场景插画风格，画面展示{scene_description}，{product_visual}置于画面中心或视觉焦点位置，配色温馨柔和，风格清新自然，适合社交媒体传播，画面整洁留有适当留白",
+      "negative_prompt": "低质量，模糊，变形，水印，色情，暴力，医疗效果对比，药品特写，过度商业广告感，杂乱背景，噪点，颗粒感",
+      "aspect_ratio": "1:1 或 4:3",
+      "tips": "插图需要与内容相关，增强文章说服力"
+    },
+    {
+      "id": "douyin_cover",
+      "name": "抖音视频封面",
+      "platform": "douyin",
+      "scene": "短视频封面，决定点击",
+      "positive_prompt_template": "抖音风格视频封面，高对比度，{emotion_style}氛围，画面突出{topic}主题，人物表情自然真实（若有出镜），{product_visual}自然融入画面，背景简洁或符合内容场景，整体有冲击力，能在信息流中快速抓住注意力",
+      "negative_prompt": "模糊，变形，水印，色情，暴力，恐怖，内容不适宜，医疗效果对比，药品包装特写，过度美颜失真，标题党误导，低俗，抄袭",
+      "aspect_ratio": "9:16",
+      "tips": "抖音封面需要在0.3秒内抓住用户注意力"
+    },
+    {
+      "id": "douyin_video_scene",
+      "name": "抖音短视频画面",
+      "platform": "douyin",
+      "scene": "视频内容场景",
+      "positive_prompt_template": "短视频场景画面，{scene_setting}，画面光线充足{lighting_style}，{character_presence}人物自然出镜，表情{expression_style}，{product_placement}，整体风格符合抖音平台调性，画面质感清晰，{additional_elements}",
+      "negative_prompt": "模糊，抖动，曝光过度或不足，噪点，变形，水印，色情，暴力，医疗效果展示，药品特写，商业广告感过强，违和感",
+      "aspect_ratio": "9:16",
+      "tips": "视频画面需要与内容主题高度契合"
+    },
+    {
+      "id": "videocenter_poster",
+      "name": "视频号海报",
+      "platform": "videocenter",
+      "scene": "视频号内容宣传图",
+      "positive_prompt_template": "视频号风格宣传海报，专业感与亲和力并重，画面{poster_style}，{topic_presentation}主题突出，{product_visual}自然展示，配色稳重专业{color_palette}，整体风格符合微信生态，适合中年用户群体审美，文字留白区域充足",
+      "negative_prompt": "过度娱乐化，低俗，夸张，医疗对比图，药品特写，水印，模糊，变形，色彩失真，医疗建议暗示",
+      "aspect_ratio": "16:9",
+      "tips": "视频号用户年龄层相对成熟，内容需要兼顾专业性和可读性"
+    },
+    {
+      "id": "social_poster",
+      "name": "社交媒体通用海报",
+      "platform": "universal",
+      "scene": "多平台通用宣传图",
+      "positive_prompt_template": "多平台适用宣传海报，设计风格{design_style}，画面主体{subject}，配色{color_scheme}，整体视觉冲击力{impact_level}，适合社交媒体传播，符合护肤品类视觉规范，品牌元素{brand_elements}",
+      "negative_prompt": "医疗效果对比，药品外观，治疗前后对比，虚假宣传感，水印，低质量，模糊，变形，色情内容，暴力内容，不当联想",
+      "aspect_ratio": "1:1 或 4:5",
+      "tips": "通用海报需要适配多个平台的基本规范"
+    }
+  ],
+  "common_elements": {
+    "color_schemes": [
+      "粉色到橙色渐变",
+      "蓝色到紫色渐变",
+      "莫兰迪色系",
+      "清新绿色系",
+      "温柔奶茶色系",
+      "专业蓝色系"
+    ],
+    "lighting_styles": [
+      "自然柔光",
+      "专业影棚光",
+      "暖色调氛围光",
+      "冷色调专业光"
+    ],
+    "emotion_styles": [
+      "愉悦轻松",
+      "专业严谨",
+      "温馨亲切",
+      "时尚潮流",
+      "自然清新"
+    ],
+    "product_visual_options": [
+      "产品包装完整展示",
+      "产品挤出形态展示",
+      "产品与使用场景结合",
+      "产品组合陈列"
+    ]
+  },
+  "compliance_reminder": "【重要提示】AI生成图片仅作为设计参考，对外发布前必须经过医学、法务合规审核；严禁制作皮肤前后疗效对比图，禁止暗示治疗效果。"
+}

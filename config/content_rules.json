@@ -1,0 +1,126 @@
+{
+  "platforms": [
+    {
+      "id": "xiaohongshu",
+      "name": "小红书",
+      "description": "年轻女性为主的种草社区",
+      "characteristics": [
+        "图文+短视频为主",
+        "注重真实分享感",
+        "强调使用场景和效果展示",
+        "社区互动氛围强"
+      ],
+      "content_style": "真实、亲切、有干货、避免过度营销感",
+      "hashtags_example": ["#护肤", "#敏感肌", "#成分党", "#好物分享"],
+      "length_limit": "正文1000字以内",
+      "forbidden_content": [
+        "绝对化用语（最好、最棒、第一等）",
+        "医疗效果承诺",
+        "治疗前后对比图",
+        "未经备案的功效宣传"
+      ]
+    },
+    {
+      "id": "douyin",
+      "name": "抖音",
+      "description": "短视频平台，用户覆盖面广",
+      "characteristics": [
+        "15秒-3分钟短视频",
+        "节奏快、内容抓眼球",
+        "强调前3秒吸引力",
+        "适合情景剧、教程类内容"
+      ],
+      "content_style": "生动、有趣、节奏感强、避免说教",
+      "hashtags_example": ["#皮肤管理", "#护肤小技巧", "#美妆教程"],
+      "length_limit": "视频时长建议60秒内",
+      "forbidden_content": [
+        "夸大功效",
+        "医疗建议",
+        "虚假宣传"
+      ]
+    },
+    {
+      "id": "videocenter",
+      "name": "视频号",
+      "description": "微信生态内的短视频平台",
+      "characteristics": [
+        "依托微信社交链传播",
+        "用户年龄层相对成熟",
+        "内容偏好实用性",
+        "适合深度科普内容"
+      ],
+      "content_style": "专业、权威、实用、避免过于娱乐化",
+      "hashtags_example": ["#皮肤健康", "#医学科普", "#护肤知识"],
+      "length_limit": "视频时长1-3分钟",
+      "forbidden_content": [
+        "绝对化用语",
+        "医疗效果保证",
+        "未经证实的功效"
+      ]
+    }
+  ],
+  "columns": [
+    {
+      "id": "science_pop",
+      "name": "成分科普",
+      "description": "解读护肤品成分，帮助消费者看懂配方",
+      "target_audience": ["成分党", "理性消费者", "护肤进阶用户"],
+      "content_focus": "成分功效、作用机理、使用注意事项",
+      "tone": "专业、严谨、通俗易懂"
+    },
+    {
+      "id": "skin_tips",
+      "name": "护肤干货",
+      "description": "日常护肤技巧和问题解决方案",
+      "target_audience": ["护肤新手", "有具体皮肤问题的人群"],
+      "content_focus": "护肤步骤、产品搭配、问题解决",
+      "tone": "实用、亲切、易操作"
+    },
+    {
+      "id": "product_story",
+      "name": "产品故事",
+      "description": "品牌/产品背后的研发故事和使用场景",
+      "target_audience": ["品牌关注者", "已有用户", "潜在消费者"],
+      "content_focus": "研发背景、使用体验、场景案例",
+      "tone": "真诚、有温度、避免硬广感"
+    },
+    {
+      "id": "qa_session",
+      "name": "问答互动",
+      "description": "针对用户常见问题的解答",
+      "target_audience": ["有疑问的潜在用户", "想深入了解的人群"],
+      "content_focus": "常见问题、专业解答、误区纠正",
+      "tone": "耐心、专业、有亲和力"
+    }
+  ],
+  "target_audiences": [
+    {
+      "id": "acne_youth",
+      "name": "痘痘困扰人群",
+      "age_range": "18-28岁",
+      "pain_points": ["反复长痘", "留下痘印", "油脂分泌旺盛"],
+      "content_preference": ["快速见效产品", "真实使用反馈", "成分解析"]
+    },
+    {
+      "id": "sensitive_skin",
+      "name": "敏感肌人群",
+      "age_range": "20-40岁",
+      "pain_points": ["容易过敏", "泛红刺痛", "皮肤屏障受损"],
+      "content_preference": ["温和安全", "修护屏障", "成分简单"]
+    },
+    {
+      "id": "anti_aging",
+      "name": "抗衰需求人群",
+      "age_range": "25-45岁",
+      "pain_points": ["细纹松弛", "肤色暗沉", "衰老焦虑"],
+      "content_preference": ["功效成分", "科技护肤", "长期效果"]
+    },
+    {
+      "id": "skincare_beginner",
+      "name": "护肤新手",
+      "age_range": "18-25岁",
+      "pain_points": ["不知道用什么", "护肤步骤迷茫", "预算有限"],
+      "content_preference": ["入门指南", "平价好物", "简单步骤"]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "gpt-4o-mini",
+    "name": "GPT-4o Mini",
+    "provider": "OpenAI",
+    "base_url": "https://api.openai.com/v1",
+    "api_key": "",
+    "enabled": true,
+    "is_default": false,
+    "model_type": "text",
+    "api_style": "openai"
+  },
+  {
+    "id": "gpt-4o",
+    "name": "GPT-4o",
+    "provider": "OpenAI",
+    "base_url": "https://api.openai.com/v1",
+    "api_key": "",
+    "enabled": true,
+    "is_default": false,
+    "model_type": "text",
+    "api_style": "openai"
+  },
+  {
+    "id": "deepseek-chat",
+    "name": "DeepSeek Chat",
+    "provider": "DeepSeek",
+    "base_url": "https://api.deepseek.com/v1",
+    "api_key": "",
+    "enabled": true,
+    "is_default": false,
+    "model_type": "text",
+    "api_style": "openai"
+  },
+  {
+    "id": "gpt-5.5",
+    "name": "gpt",
+    "provider": "gpt",
+    "base_url": "https://api.vectorengine.cn/v1",
+    "api_key": "sk-pW7JwGKg7mPG9WGI27dVqm1erxiwPkqhNqfcFao2g3pFWa6b",
+    "enabled": true,
+    "is_default": false,
+    "model_type": "text",
+    "api_style": "openai"
+  },
+  {
+    "id": "ep-20250515161126-p78tj",
+    "name": "豆包",
+    "provider": "豆包",
+    "base_url": "https://ark.cn-beijing.volces.com/api/v3",
+    "api_key": "8a606aec-6c62-4524-af8b-6b3bf5d51df9",
+    "enabled": true,
+    "is_default": true,
+    "model_type": "text",
+    "api_style": "openai"
+  },
+  {
+    "id": "gpt-image-2-pro",
+    "name": "gpt生图",
+    "provider": "gpt",
+    "base_url": "https://pikachu.hueling.cc",
+    "api_key": "sk-a86d0f8940ca117f8f2ac64caf0a70503d7aef17d1bce267d9ad64f8f169be8d",
+    "model_type": "image",
+    "api_style": "openai",
+    "enabled": true,
+    "is_default": true,
+    "supports_edit": true,
+    "quality": ""
+  }
+]
