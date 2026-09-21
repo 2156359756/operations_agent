@@ -1,6 +1,7 @@
-# 品牌官号运营Agent
+<img width="1883" height="866" alt="b1186fa4a8ec9dc93cfca8785ebb405f" src="https://github.com/user-attachments/assets/d8dc64bb-d21e-44c0-9b92-4b852fc071e4" /># 品牌官号运营Agent
 
-知原药业品牌官号内容创作助手 - 基于FastAPI + 原生HTML/JS构建的本地Web应用。
+品牌官号内容创作助手 - 基于FastAPI + 原生HTML/JS构建的本地Web应用。
+<img width="1883" height="866" alt="b1186fa4a8ec9dc93cfca8785ebb405f" src="https://github.com/user-attachments/assets/4e7c5362-7980-451c-b2ac-0788f0f137f7" />
 
 ## 📋 项目概述
 
